@@ -1,0 +1,15 @@
+<h3>Daily usage chart <span style="cursor: pointer;" [ngStyle]="{ 'color': isLoaded ? 'green' : 'red' }" (click)="refresh()">&#8634;</span></h3>
+<ng-container *ngIf="isLoaded">
+<div style='display: inline-block; height: 120px; width: 21em;'>
+	<div style='height: 100px;'>
+		<ng-container style='display:inline-block' *ngFor="let day of usage.days"><div style='display: inline-block; width: 0.5em; height: 100px'></div><div style='display: inline-block; width: 1em; background-color: blue;' [ngStyle]="{ 'height':  getPct(day[1], usage.max) + '%' }" title='{{ getGB(day[1]) }}'></div><div style='display: inline-block; width: 1em; background-color: orange;' [ngStyle]="{ 'height': getPct(day[2], usage.max) + '%' }" title='{{ getGB(day[2]) }}'></div><div style='display: inline-block; width: 0.5em; height: 100px'></div></ng-container>
+	</div>
+	<div>
+		<div *ngFor="let day of usage.days" style='text-align: center; display: inline-block; width: 3em;'>{{ getDay(day[0]) }}</div>
+	</div>
+</div>
+<div style='vertical-align: top; padding-left: 2em; display: inline-block; width: 100px; height: 100px'>
+	<div style='display: inline-block; width: 15px; height: 15px; background-color: blue'></div><div style='display: inline-block'>&nbsp;Download</div><br />
+	<div style='display: inline-block; width: 15px; height: 15px; background-color: orange'></div><div style='display: inline-block'>&nbsp;Upload</div>
+</div>
+</ng-container>

@@ -1,0 +1,7 @@
+vultr-ng/dist
+vultr-ng/e2e
+vultr-ng/node_modules
+.vscode
+.pytest_cache
+decommissioned
+secrets.php

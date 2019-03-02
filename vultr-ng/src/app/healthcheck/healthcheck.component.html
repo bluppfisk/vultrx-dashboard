@@ -1,0 +1,12 @@
+<h2>Health Check <span style="cursor: pointer;" [ngStyle]="{ 'color': isLoaded ? 'green' : 'red' }"
+		(click)="refresh()">&#8634;</span></h2>
+<ul>
+	<li *ngFor="let location of locations">
+		<button (click)="getHealth(location)">Check {{ ip }} from {{ location.name }}</button>
+		<div *ngIf="location.health" style="display: inline-block;">
+			<div [ngStyle]="location.health.Available ? {'background-color': 'green'} : {'background-color' : 'red'}"
+				style="width: 1em; height: 1em; display: inline-block;"></div> <span
+				*ngIf="location.health.Available">Online. Latency: {{ location.health.TimeTaken }} ms</span>
+		</div>
+	</li>
+</ul>

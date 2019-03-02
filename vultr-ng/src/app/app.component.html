@@ -1,0 +1,30 @@
+<h1>Vultr X Dashboard</h1>
+<h2>Basic Info <span style="cursor: pointer;" [ngStyle]="{ 'color': isLoaded ? 'green' : 'red' }"
+    (click)="refresh()">&#8634;</span></h2>
+<div>
+  Status: <div [ngStyle]="info.online ? {'background-color': 'green'} : {'background-color' : 'red'}"
+    style="width: 1em; height: 1em; display: inline-block;"></div> <b>{{ info.online ? "Online": "Offline" }}</b><br />
+  Location: <b>{{ info.location }}</b><br />
+  Your address when connected: <b>{{ info.main_ip }}</b><br />
+  <a href="https://{{ info.main_ip }}">Connection documentation</a><br />
+  IP Addresses: <select (change)="changeCurrentIp($event.target.value)">
+    <option *ngFor="let ip of info.ips" value="{{ ip }}" [selected]="currentIp === ip">{{ ip }}</option>
+  </select>
+</div>
+<app-healthcheck [ip]=currentIp></app-healthcheck>
+<h2>Bandwidth Usage <span style="cursor: pointer;" [ngStyle]="{ 'color': isLoaded ? 'green' : 'red' }"
+    (click)="refresh()">&#8634;</span></h2>
+<div>
+  Percentage used: <b>{{ info.usage_percentage }}%</b><br />
+  <div style="display: inline-block; background-color: grey; height: 2em;"
+    [ngStyle]="{ 'width': info.usage_percentage + '%' }"></div><!--
+  --><div style="display: inline-block; background-color: lightgrey; height: 2em;"
+    [ngStyle]="{ 'width': info.usage_percentage_left + '%' }"></div><br />
+  Current bandwidth usage: <b>{{ info.usage_current }} GB</b><br />
+  Maximum monthly allowance: <b>{{ info.usage_allowed }} GB</b>
+  <app-bandwidth-graph></app-bandwidth-graph>
+</div>
+<footer style='font-size: 10pt; padding-top: 2em;'>
+  <hr>
+  &copy; 2019 Sander Van de Moortel
+</footer>
